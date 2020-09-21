@@ -1,0 +1,278 @@
+swagger: "2.0"
+info:
+  description: "Api de una aplicación que permite crear, editar, obtener y borrar categorias, y crear, editar, obtener y borrar productos que estan asociados a estas categorias"
+  version: "1.0.0"
+  title: "Super Marquet"
+ 
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "petstore.swagger.io"
+basePath: "/v2"
+
+paths:
+  /categories:
+    post:
+      tags:
+      - "categories"
+      summary: "Add a new categorie"
+      description: ""
+      operationId: "CreateCategory"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "description"
+        required: true
+        schema:
+          $ref: "#/definitions/Category"
+      responses:
+        "405":
+          description: "Invalid input"
+     
+    put:
+      tags:
+      - "categories"
+      summary: "Update an existing categorie"
+      description: ""
+      operationId: "updateCategorie"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "ddescription"
+        required: true
+        schema:
+          $ref: "#/definitions/Category"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Category not found"
+        "405":
+          description: "Validation exception"
+     
+
+    get:
+      tags:
+      - "categories"
+      summary: "Finds categories"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "findCategoriesByStatus"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "ddescription"
+        required: true
+        schema:
+          $ref: "#/definitions/Category"
+      responses:
+        "400":
+          description: "Invalid status value"
+  /categories/id:
+    delete:
+      tags:
+      - "categories"
+      summary: "Deletes a category"
+      description: ""
+      operationId: "deleteCategory"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "id"
+        description: "description"
+        required: true
+        schema:
+          $ref: "#/definitions/Category"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Category not found"
+    get:
+      tags:
+      - "categories"
+      summary: "Finds a category"
+      description: "description"
+      operationId: "findCategoryById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "id"
+        description: "ddescription"
+        required: true
+        schema:
+          $ref: "#/definitions/Category"
+      responses:
+        "400":
+          description: "Invalid status value"
+         
+  /products:
+    post:
+      tags:
+      - "products"
+      summary: "Add a new product"
+      description: "description"
+      operationId: "CreateProduct"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "description"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        "405":
+          description: "Invalid input"
+     
+    put:
+      tags:
+      - "products"
+      summary: "Update an existing products"
+      description: ""
+      operationId: "updateProduct"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "ddescription"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Category not found"
+        "405":
+          description: "Validation exception"
+     
+
+    get:
+      tags:
+      - "products"
+      summary: "Finds products"
+      description: "Multiple status values can be provided with comma separated strings"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "ddescription"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        "400":
+          description: "Invalid status value"
+  /products/id:
+    delete:
+      tags:
+      - "products"
+      summary: "Deletes a product"
+      description: ""
+      operationId: "deleteProduct"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "id"
+        description: "description"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Category not found"
+    get:
+      tags:
+      - "products"
+      summary: "Finds a product"
+      description: "description"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "id"
+        description: "ddescription"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        "400":
+          description: "Invalid status value"
+     
+ 
+
+definitions:
+  Product:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      description:
+        type: "string"
+      category:
+        type: "integer"
+      shipDate:
+        type: "string"
+        format: "date-time"
+      unit_measurement:
+        type: "string"
+        enum:
+        - "Units"
+        - "Liters"
+        - "Grams"
+      quantity:
+        type: "integer"
+     
+    xml:
+      name: "Order"
+  Category:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      description:
+        type: "string"
+    xml:
+      name: "Category"
+
+  
